@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festinha da Laura Cecília - 10 Anos!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-principal: #ff4e93;
+            --rosa-claro: #ffb6c1;
+            --rosa-escuro: #d64c78;
+            --roxo: #b399ff;
+            --azul-claro: #87cefa;
+            --branco: #ffffff;
+            --preto: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, var(--azul-claro) 100%);
+            color: var(--preto);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .titulo {
+            font-size: 3.5rem;
+            color: var(--rosa-principal);
+            text-shadow: 3px 3px 0px var(--roxo);
+            margin-bottom: 20px;
+            animation: pulsar 2s infinite;
+        }
+
+        .subtitulo {
+            font-size: 1.8rem;
+            color: var(--roxo);
+            margin-bottom: 30px;
+        }
+
+        .miku-image {
+            width: 300px;
+            margin: 0 auto;
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(183, 153, 255, 0.7));
+            animation: flutuar 5s ease-in-out infinite;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--rosa-escuro);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .destaque {
+            color: var(--roxo);
+            font-weight: bold;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .info-item {
+            text-align: center;
+            padding: 15px;
+            width: 250px;
+            margin: 10px;
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, var(--azul-claro) 100%);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item i {
+            font-size: 2.5rem;
+            color: var(--rosa-principal);
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--rosa-escuro);
+        }
+
+        input, select {
+            padding: 12px;
+            border: 2px solid var(--rosa-claro);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--rosa-principal);
+            box-shadow: 0 0 10px rgba(255, 78, 147, 0.5);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button {
+            background: linear-gradient(to right, var(--rosa-principal), var(--roxo));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid var(--rosa-principal);
+        }
+
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 400px;
+        }
+
+        .presente-opcoes {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, var(--azul-claro) 100%);
+            border-radius: 15px;
+        }
+
+        .presente-opcoes.mostrar {
+            display: block;
+            animation: aparecer 0.5s ease;
+        }
+
+        .confirmation-message {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--rosa-claro) 0%, var(--azul-claro) 100%);
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .confirmation-message.mostrar {
+            display: block;
+            animation: aparecer 0.5s ease;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 20px;
+            background: #ffebee;
+            color: #c62828;
+            border-radius: 15px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error-message.mostrar {
+            display: block;
+            animation: aparecer 0.5s ease;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .loading.mostrar {
+            display: block;
+        }
+
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--rosa-principal);
+            margin: 0 3px;
+            animation: pulsar 1.5s infinite ease-in-out;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--preto);
+            font-size: 0.9rem;
+        }
+
+        .decoracao {
+            position: absolute;
+            font-size: 2rem;
+            color: var(--rosa-principal);
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        .btn-maps {
+            display: inline-block;
+            background: var(--rosa-principal);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-maps:hover {
+            background: var(--rosa-escuro);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animações */
+        @keyframes pulsar {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes flutuar {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes aparecer {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .titulo {
+                font-size: 2.5rem;
+            }
+            
+            .subtitulo {
+                font-size: 1.5rem;
+            }
+            
+            .info-card {
+                flex-direction: column;
+            }
+            
+            .map-container iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decoracao" style="top: 10%; left: 5%;">♪</div>
+    <div class="decoracao" style="top: 15%; right: 7%;">♫</div>
+    <div class="decoracao" style="bottom: 20%; left: 8%;">★</div>
+    <div class="decoracao" style="bottom: 25%; right: 10%;">☆</div>
+
+    <div class="container">
+        <header>
+            <h1 class="titulo">Laura Cecília</h1>
+            <h2 class="subtitulo">Está completando 10 anos!</h2>
+            <img src="miku.png" alt="Hatsune Miku" class="miku-image">
+        </header>
+
+        <section id="sobre">
+            <h2>Você está convidado!</h2>
+            <p>Olá! Eu sou a Laura Cecília e estou completando 10 anos! 🎉</p>
+            <p>Estou muito animada para comemorar esta data especial com todos vocês!</p>
+            <p>Minha festa terá o tema da <span class="destaque">Hatsune Miku</span>, minha cantora virtual favorita!</p>
+            <p>Venha se divertir comigo neste dia inesquecível!</p>
+            
+            <div class="info-card">
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Data</h3>
+                    <p>20 de setembro de 2025</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Horário</h3>
+                    <p>a partir das 15h30</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Local</h3>
+                    <p>Buffet Espaço Encanto</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="confirmacao">
+            <h2>Confirme sua presença</h2>
+            <p>Por favor, preencha o formulário abaixo para confirmar sua presença na minha festa!</p>
+            
+            <form id="confirmacao-form">
+                <div class="form-group">
+                    <label for="nome">Seu nome completo:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="adultos">Número de adultos:</label>
+                    <select id="adultos" name="adultos" required>
+                        <option value="0">0</option>
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="criancas">Número de crianças:</label>
+                    <select id="criancas" name="criancas" required>
+                        <option value="0" selected>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Você pretende dar:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="presente-fisico" name="tipo-presente" value="presente" checked>
+                            <label for="presente-fisico">Presente físico</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="pix" name="tipo-presente" value="pix">
+                            <label for="pix">PIX</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" id="submit-btn">Confirmar Presença</button>
+                
+                <div class="loading" id="loading">
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <p>Enviando confirmação...</p>
+                </div>
+            </form>
+            
+            <div id="opcoes-presente" class="presente-opcoes">
+                <h3>Informações para Presente</h3>
+                <div id="info-presente">
+                    <p>Ficamos felizes com sua escolha por presente físico! Traga embrulhado para a festa!</p>
+                </div>
+                <div id="info-pix" style="display: none;">
+                    <p>Valor simbólico: R$ 100,00</p>
+                    <p>Chave PIX: <span class="destaque">lauracecilia.aniversario@email.com</span></p>
+                    <p>Envie qualquer valor com a mensagem "Feliz Aniversário Laura!"</p>
+                </div>
+            </div>
+            
+            <div id="confirmacao-msg" class="confirmation-message">
+                <h3>Obrigada por confirmar!</h3>
+                <p>Sua presença foi confirmada com sucesso! Estamos ansiosos para te ver na festa!</p>
+            </div>
+            
+            <div id="error-msg" class="error-message">
+                <h3>Erro ao enviar confirmação</h3>
+                <p>Ocorreu um erro ao processar sua confirmação. Por favor, tente novamente.</p>
+            </div>
+        </section>
+
+        <section id="localizacao">
+            <h2>Local da Festa</h2>
+            <p>O aniversário será no <strong>Rua Luis Eduardo</strong>, 35, Bairro Vila Luizão.</p>
+            
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15944.19849624591!2d-44.21188478432636!3d-2.490524572962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7f6924c5008143b%3A0x4be1788202cdb8a!2sR.%20Lu%C3%ADs%20Eduardo%20-%20Turu%2C%20S%C3%A3o%20Lu%C3%ADs%20-%20MA%2C%2065066-620!5e0!3m2!1spt-BR!2sbr!4v1755606599801!5m2!1spt-BR!2sbr" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="https://maps.app.goo.gl/Zj4tjdGyCkUa7cH17" target="_blank" class="btn-maps">
+                    <i class="fas fa-external-link-alt"></i> Abrir no Google Maps
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>Desenvolvido com 💖 para Laura Cecília - 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // URL do Google Apps Script (substitua pela sua URL)
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwATbOljE5yII0jZIbpNbVlZxTC0IyRSaZhfiPHQEgov_wgIeUPuKBtIYIK975WqAoHhA/exec';
+        
+        // Elementos do DOM
+        const form = document.getElementById('confirmacao-form');
+        const loading = document.getElementById('loading');
+        const confirmacaoMsg = document.getElementById('confirmacao-msg');
+        const errorMsg = document.getElementById('error-msg');
+        const submitBtn = document.getElementById('submit-btn');
+
+        // Mostrar informações de presente baseado na seleção
+        document.querySelectorAll('input[name="tipo-presente"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const opcoesPresente = document.getElementById('opcoes-presente');
+                const infoPresente = document.getElementById('info-presente');
+                const infoPix = document.getElementById('info-pix');
+                
+                opcoesPresente.classList.add('mostrar');
+                
+                if (this.value === 'presente') {
+                    infoPresente.style.display = 'block';
+                    infoPix.style.display = 'none';
+                } else {
+                    infoPresente.style.display = 'none';
+                    infoPix.style.display = 'block';
+                }
+            });
+        });
+
+        // Enviar dados para o Google Sheets
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Coletar dados do formulário
+            const nome = document.getElementById('nome').value;
+            const adultos = document.getElementById('adultos').value;
+            const criancas = document.getElementById('criancas').value;
+            const tipoPresente = document.querySelector('input[name="tipo-presente"]:checked').value;
+            
+            // Mostrar loading
+            loading.classList.add('mostrar');
+            submitBtn.disabled = true;
+            errorMsg.classList.remove('mostrar');
+            
+            try {
+                // Enviar dados para o Google Sheets
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain; charset=utf-8'
+                    },
+                    body: JSON.stringify({ nome, adultos, criancas, tipoPresente })
+                });
+                
+                const result = await response.json();
+                
+                if (result.result === 'success') {
+                    mostrarConfirmacao();
+                } else {
+                    throw new Error('Erro no servidor');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                errorMsg.classList.add('mostrar');
+                errorMsg.scrollIntoView({ behavior: 'smooth' });
+            } finally {
+                loading.classList.remove('mostrar');
+                submitBtn.disabled = false;
+            }
+        });
+
+        function mostrarConfirmacao() {
+            confirmacaoMsg.classList.add('mostrar');
+            
+            // Rolagem suave para a mensagem de confirmação
+            confirmacaoMsg.scrollIntoView({ behavior: 'smooth' });
+            
+            // Limpar formulário
+            form.reset();
+            
+            // Esconder opções de presente após alguns segundos
+            setTimeout(() => {
+                document.getElementById('opcoes-presente').classList.remove('mostrar');
+            }, 5000);
+        }
+
+        // Inicializar quando a página carregar
+        window.onload = function() {
+            // Adicionar efeitos de digitação no título
+            const titulo = document.querySelector('.titulo');
+            const textoOriginal = titulo.textContent;
+            titulo.textContent = '';
+            
+            let i = 0;
+            function digitar() {
+                if (i < textoOriginal.length) {
+                    titulo.textContent += textoOriginal.charAt(i);
+                    i++;
+                    setTimeout(digitar, 100);
+                }
+            }
+            
+            // Iniciar efeito de digitação após um breve delay
+            setTimeout(digitar, 500);
+        };
+    </script>
+</body>
+</html>
