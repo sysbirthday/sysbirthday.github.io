@@ -439,10 +439,11 @@
                 <h3>Informações para Presente</h3>
                 <div id="info-presente">
                     <p>Ficamos felizes com sua escolha por presente físico! Traga embrulhado para a festa!</p>
+                    <p>Tamanho de roupa 14 anos</p>
+                    <p>Calçado tamanho 35</p>
                 </div>
                 <div id="info-pix" style="display: none;">
-                    <p>Valor simbólico: R$ 100,00</p>
-                    <p>Chave PIX: <span class="destaque">lauracecilia.aniversario@email.com</span></p>
+                    <p>Chave PIX: <span class="destaque">98984397165</span></p>
                     <p>Envie qualquer valor com a mensagem "Feliz Aniversário Laura!"</p>
                 </div>
             </div>
@@ -572,23 +573,37 @@
 
         // Inicializar quando a página carregar
         window.onload = function() {
-            // Adicionar efeitos de digitação no título
-            const titulo = document.querySelector('.titulo');
-            const textoOriginal = titulo.textContent;
-            titulo.textContent = '';
-            
-            let i = 0;
-            function digitar() {
-                if (i < textoOriginal.length) {
-                    titulo.textContent += textoOriginal.charAt(i);
-                    i++;
-                    setTimeout(digitar, 100);
-                }
+        // Adicionar efeitos de digitação no título
+        const titulo = document.querySelector('.titulo');
+        const textoOriginal = titulo.textContent;
+        titulo.textContent = '';
+    
+        let i = 0;
+        function digitar() {
+            if (i < textoOriginal.length) {
+                titulo.textContent += textoOriginal.charAt(i);
+                i++;
+                setTimeout(digitar, 100);
             }
-            
-            // Iniciar efeito de digitação após um breve delay
-            setTimeout(digitar, 500);
-        };
+        }
+        setTimeout(digitar, 500);
+
+        // 🔹 Mostrar opções de presente logo ao abrir
+        const selecionado = document.querySelector('input[name="tipo-presente"]:checked').value;
+        const opcoesPresente = document.getElementById('opcoes-presente');
+        const infoPresente = document.getElementById('info-presente');
+        const infoPix = document.getElementById('info-pix');
+
+        opcoesPresente.classList.add('mostrar');
+
+        if (selecionado === 'presente') {
+            infoPresente.style.display = 'block';
+            infoPix.style.display = 'none';
+        } else {
+            infoPresente.style.display = 'none';
+            infoPix.style.display = 'block';
+        }
+    };
     </script>
 </body>
 </html>
